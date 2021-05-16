@@ -1,3 +1,80 @@
 @import './reset.css';
 
 html { font: 12.5px/12.5px Helvetica, sans-serif; }
+
+body {
+
+    display: flex;
+    min-height: 100vh;
+    background-image: linear-gradient(to right bottom, #FFF, #FAFAFA, #FFF);
+}
+
+.frame {
+
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    min-width: 25rem;
+}
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form__field {
+
+    display: flex;
+    padding-bottom: 1.5rem;
+    width: 75%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.form__label {
+
+    line-height: 3rem;
+    text-indent: 1.1rem;
+    font-size: 1.05rem;
+    color: #A1A2A3;
+    letter-spacing: .05rem;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: text;
+}
+
+.form__input {
+
+    padding: 0 1rem;
+    border: .1rem solid #E1E2E3;
+
+    line-height: 2.8rem;
+    font-size: 1.05rem;
+    letter-spacing: .05rem;
+}
+
+.form__button {
+
+    margin: 1.5rem 0 2rem 0;
+    width: 55%;
+    background-color: #00a8e8;
+
+    line-height: 3rem;
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 1.5rem;
+    color: #FFF;
+    letter-spacing: .1rem;
+
+    cursor: pointer;
+}
+
+.frame__trigger {
+
+    line-height: 1.5rem;
+    text-align: center;
+}
