@@ -6,6 +6,34 @@
     <title>Sample form</title>
 </head>
 <body>
-
+    <main class = frame>
+        <header class = frame__header>
+            <h1>Sign in</h1>
+        </header>
+        <form
+            class = form
+            action
+            method = POST
+            autocomplete = on
+        >
+            <input
+                class = form__field
+                type = email
+                name = email
+                placeholder = Email
+            >
+            <input
+                class = form__field
+                type = password
+                name = password
+                placeholder = Password
+            >
+            <button class = form__button type = submit>Sign in</button>
+            <script>
+                document.querySelector('button').addEventListener('click', event => event.preventDefault());
+            </script>
+        </form>
+        <a class = frame__trigger>Not registered?</a>
+    </main>
 </body>
 </html>
