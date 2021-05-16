@@ -1,0 +1,14 @@
+{
+  "name": "sample-form",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakub-s-ziolkowski/sample-form.git"
+  }
+}
