@@ -5,20 +5,31 @@ const http = require('http'),
 
 const getFile = fileName =>
     new Promise((resolve, reject) =>
-        fs.readFile(fileName, 'utf8', (error, data) => {
+        fs.readFile(fileName, (error, content) => {
 
-            if (!error && data) resolve(data);
+            if (!error && content) resolve(content);
             else reject(error);
         })
     );
 
 http.createServer((req, res) => {
 
-    getFile('public/index.html')
-        .then(html => {
+    const filePath = __dirname + (req.url === '/' ? '/public/index.html' : req.url);
+    const extensionName = filePath.split('.').pop()
+    let contentType;
 
-            res.writeHead(200, {'Content-type': 'text/html; charset = utf-8'});
-            res.end(html);
+    switch (extensionName) {
+
+        case 'html': contentType = 'text/html'; break;
+        case 'css': contentType = 'text/css'; break;
+        case 'js': contentType = 'text/javascript'; break;
+    }
+
+    getFile(filePath)
+        .then(content => {
+
+            res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
+            res.end(content);
         })
         .catch(error => {
 
