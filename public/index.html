@@ -8,27 +8,30 @@
 </head>
 <body>
     <main class = frame>
-        <header class = frame__header>
-            <h1>Sign in</h1>
-        </header>
         <form
             class = form
             action
             method = POST
             autocomplete = on
         >
-            <input
-                class = form__field
-                type = email
-                name = email
-                placeholder = Email
-            >
-            <input
-                class = form__field
-                type = password
-                name = password
-                placeholder = Password
-            >
+            <div class = form__field>
+                <label class = form__label for = email>Email</label>
+                <input
+                    class = form__input
+                    id = email
+                    type = email
+                    name = email
+                >
+            </div>
+            <div class = form__field>
+                <label class = form__label for = password>Password</label>
+                <input
+                    class = form__input
+                    id = password
+                    type = password
+                    name = password
+                >
+            </div>
             <button class = form__button type = submit>Sign in</button>
             <script>
                 document.querySelector('button').addEventListener('click', event => event.preventDefault());
