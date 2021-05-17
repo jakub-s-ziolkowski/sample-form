@@ -32,12 +32,30 @@
                     name = password
                 >
             </div>
+            <script>
+                document.querySelectorAll('.form__input')
+                    .forEach(element => {
+
+                        const applyAnimation = event => {
+
+                            const inputLabel =  event.path[1].querySelector('.form__label');
+
+                            inputLabel.classList.add('form__label--transition');
+                            inputLabel.classList[event.type === 'focus' ? 'add' : 'remove']('form__label--active');
+
+                            window.setTimeout(() => inputLabel.classList.remove('form__label--transition'), 450);
+                        };
+
+                        element.addEventListener('focus', applyAnimation);
+                        element.addEventListener('blur', applyAnimation);
+                    });
+            </script>
             <button class = form__button type = submit>Sign in</button>
             <script>
                 document.querySelector('button').addEventListener('click', event => event.preventDefault());
             </script>
         </form>
-        <a class = frame__trigger>Not registered?</a>
+        <button class = frame__trigger title = 'Create an account'>Not registered?</button>
     </main>
 </body>
 </html>

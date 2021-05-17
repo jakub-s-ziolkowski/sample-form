@@ -26,8 +26,9 @@ body {
 
 .form__field {
 
+    position: relative;
     display: flex;
-    padding-bottom: 1.5rem;
+    padding: 1.5rem 0;
     width: 75%;
     flex-direction: column;
     justify-content: flex-end;
@@ -35,6 +36,7 @@ body {
 
 .form__label {
 
+    position: absolute;
     line-height: 3rem;
     text-indent: 1.1rem;
     font-size: 1.05rem;
@@ -46,6 +48,22 @@ body {
     -ms-user-select: none;
     user-select: none;
     cursor: text;
+}
+
+.form__label--transition {
+
+    transition-property: transform, font-size, height, color, line-height, text-indent;
+    transition-duration: .45s;
+}
+
+.form__label--active {
+
+    line-height: 2rem;
+    text-indent: initial;
+    font-size: 1rem;
+    color: #717273;
+
+    transform: translateY(-3rem);
 }
 
 .form__input {
@@ -62,7 +80,7 @@ body {
 
     margin: 1.5rem 0 2rem 0;
     width: 55%;
-    background-color: #00a8e8;
+    background-color: #00A8E8;
 
     line-height: 3rem;
     font-family: 'Trebuchet MS', sans-serif;
@@ -71,10 +89,38 @@ body {
     letter-spacing: .1rem;
 
     cursor: pointer;
+    transition: margin .1s,
+                width .1s,
+                background-color .1s,
+                line-height .1s;
+}
+
+.form__button:active {
+
+    margin: 1.6rem 0 2.1rem 0;
+    width: 54%;
+    background-color: #0095D5;
+
+    line-height: 2.8rem;
 }
 
 .frame__trigger {
 
+    margin: 0 auto;
+    background-color: initial;
+
     line-height: 1.5rem;
-    text-align: center;
+    font-size: 1.15rem;
+    color: #A1A2A3;
+    letter-spacing: .05rem;
+
+    cursor: pointer;
+    transition: font-size .25s,
+                color .25s;
+}
+
+.frame__trigger:hover {
+
+    font-size: 1.1rem;
+    color: #717273;
 }
