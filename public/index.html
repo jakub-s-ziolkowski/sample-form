@@ -38,12 +38,15 @@
 
                         const applyAnimation = event => {
 
-                            const inputLabel =  event.path[1].querySelector('.form__label');
+                            if (!element.value) {
 
-                            inputLabel.classList.add('form__label--transition');
-                            inputLabel.classList[event.type === 'focus' ? 'add' : 'remove']('form__label--active');
+                                const inputLabel =  event.path[1].querySelector('.form__label');
 
-                            window.setTimeout(() => inputLabel.classList.remove('form__label--transition'), 450);
+                                inputLabel.classList.add('form__label--transition');
+                                inputLabel.classList[event.type === 'focus' ? 'add' : 'remove']('form__label--active');
+
+                                window.setTimeout(() => inputLabel.classList.remove('form__label--transition'), 450);
+                            }
                         };
 
                         element.addEventListener('focus', applyAnimation);
