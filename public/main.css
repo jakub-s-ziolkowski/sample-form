@@ -15,6 +15,12 @@ body {
     flex-direction: column;
     margin: auto;
     min-width: 25rem;
+    transition: opacity 1s;
+}
+
+.frame--transition {
+
+    opacity: 0;
 }
 
 .form {
@@ -50,6 +56,11 @@ body {
     cursor: text;
 }
 
+.form__label:first-letter {
+
+    text-transform: capitalize;
+}
+
 .form__label--transition {
 
     transition-property: transform, font-size, height, color, line-height, text-indent;
@@ -78,7 +89,7 @@ body {
 
 .form__button {
 
-    margin: 1.5rem 0 2rem 0;
+    margin: 1.5rem 0;
     width: 55%;
     background-color: #00A8E8;
 

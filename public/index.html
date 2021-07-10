@@ -13,9 +13,10 @@
             action
             method = POST
             autocomplete = on
+            data-type = in
         >
             <div class = form__field>
-                <label class = form__label for = email>Email</label>
+                <label class = form__label for = email>email</label>
                 <input
                     class = form__input
                     id = email
@@ -24,7 +25,7 @@
                 >
             </div>
             <div class = form__field>
-                <label class = form__label for = password>Password</label>
+                <label class = form__label for = password>password</label>
                 <input
                     class = form__input
                     id = password
@@ -33,25 +34,26 @@
                 >
             </div>
             <script>
-                document.querySelectorAll('.form__input')
-                    .forEach(element => {
+                const activeAnimation = element => {
 
-                        const applyAnimation = event => {
+                    const applyAnimation = event => {
 
-                            if (!element.value) {
+                        if (!element.value) {
 
-                                const inputLabel =  event.path[1].querySelector('.form__label');
+                            const inputLabel =  event.path[1].querySelector('.form__label');
 
-                                inputLabel.classList.add('form__label--transition');
-                                inputLabel.classList[event.type === 'focus' ? 'add' : 'remove']('form__label--active');
+                            inputLabel.classList.add('form__label--transition');
+                            inputLabel.classList[event.type === 'focus' ? 'add' : 'remove']('form__label--active');
 
-                                window.setTimeout(() => inputLabel.classList.remove('form__label--transition'), 450);
-                            }
-                        };
+                            window.setTimeout(() => inputLabel.classList.remove('form__label--transition'), 450);
+                        }
+                    };
 
-                        element.addEventListener('focus', applyAnimation);
-                        element.addEventListener('blur', applyAnimation);
-                    });
+                    element.addEventListener('focus', applyAnimation);
+                    element.addEventListener('blur', applyAnimation);
+                };
+
+                document.querySelectorAll('.form__input').forEach(activeAnimation);
             </script>
             <button class = form__button type = submit>Sign in</button>
             <script>
@@ -59,6 +61,74 @@
             </script>
         </form>
         <button class = frame__trigger title = 'Create an account'>Not registered?</button>
+        <script>
+            const createField = name => {
+
+                const input = document.createElement('input');
+                input.classList.add('form__input');
+                input.id = name;
+                input.type = 'text';
+                input.name = name;
+
+                const label = document.createElement('label');
+                label.appendChild(document.createTextNode(name));
+                label.classList.add('form__label');
+                label.htmlFor = 'name';
+
+                const field = document.createElement('div');
+                field.classList.add('form__field');
+                field.appendChild(label);
+                field.appendChild(input);
+
+                return field;
+            };
+
+            const trigger = document.querySelector('.frame__trigger');
+
+            trigger.addEventListener('click', () => {
+
+                const frame = document.querySelector('.frame');
+
+                frame.classList.add('frame--transition');
+
+                setTimeout(() => {
+
+                    const form = document.querySelector('.form');
+
+                    if (form.dataset.type === 'in') {
+
+                        const nameField = createField("name"),
+                              surnameField = createField("surname");
+
+                        activeAnimation(nameField.querySelector('.form__input'));
+                        activeAnimation(surnameField.querySelector('.form__input'));
+
+                        form.insertBefore(surnameField, document.querySelector('.form__field'));
+                        form.insertBefore(nameField, surnameField);
+
+                        form.dataset.type = 'out';
+                    }
+
+                    else if (form.dataset.type === 'out') {
+
+                        form.removeChild(form.querySelector('.form__field'));
+                        form.removeChild(form.querySelector('.form__field'));
+
+                        form.dataset.type = 'in';
+                    }
+
+                    const button = document.querySelector('.form__button');
+                    const buttonLabel = button.innerText.split(' ');
+                    button.innerText = buttonLabel[0] + (buttonLabel[1] === 'in' ? ' up' : ' in');
+
+                    const triggerLabel = trigger.innerText.split(' ');
+                    trigger.innerText = (triggerLabel[0] === 'Not' ? 'Already ' : 'Not ') + triggerLabel[1];
+
+                    frame.classList.remove('frame--transition');
+
+                }, 1000);
+            });
+        </script>
     </main>
 </body>
 </html>
