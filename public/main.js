@@ -1,3 +1,5 @@
+'use strict';
+
 const activeAnimation = element => {
 
     const applyAnimation = event => {
