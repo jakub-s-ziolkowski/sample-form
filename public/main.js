@@ -67,6 +67,8 @@ trigger.addEventListener('click', () => {
             form.insertBefore(surnameField, document.querySelector('.form__field'));
             form.insertBefore(nameField, surnameField);
 
+            trigger.title = 'Log in';
+
             form.dataset.type = 'out';
         }
 
@@ -74,6 +76,8 @@ trigger.addEventListener('click', () => {
 
             form.removeChild(form.querySelector('.form__field'));
             form.removeChild(form.querySelector('.form__field'));
+
+            trigger.title = 'Create an account';
 
             form.dataset.type = 'in';
         }
