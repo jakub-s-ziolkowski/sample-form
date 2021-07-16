@@ -91,5 +91,5 @@ trigger.addEventListener('click', () => {
 
         frame.classList.remove('frame--transition');
 
-    }, 1000);
+    }, 900);
 });
