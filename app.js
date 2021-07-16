@@ -25,7 +25,15 @@ http.createServer((req, res) => {
         case 'js': contentType = 'text/javascript'; break;
     }
 
-    getFile(filePath)
+    if (req.url == '/qwerty') {
+
+        let data = '';
+
+        req.on('data', chunk => data += chunk);
+        req.on('end', () => console.log(data));
+    }
+
+    else getFile(filePath)
         .then(content => {
 
             res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
@@ -35,6 +43,6 @@ http.createServer((req, res) => {
 
             res.setHeader('Content-Type', 'text/plain');
             res.end(`Error ${error}`);
-        })
+        });
 
 }).listen(3000, '127.0.0.1');
