@@ -66,7 +66,7 @@ document.querySelector('button').addEventListener('click', event => {
 
         const xhr = new XMLHttpRequest();
 
-        xhr.open('POST', 'qwerty');
+        xhr.open('POST', 'sign');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(data));
     }

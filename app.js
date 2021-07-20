@@ -14,27 +14,42 @@ const getFile = fileName =>
 
 http.createServer((req, res) => {
 
-    const filePath = __dirname + (req.url === '/' ? '/public/index.html' : req.url);
-    const extensionName = filePath.split('.').pop()
-    let contentType;
+    const path = __dirname + (req.url === '/' ? '/public/index.html' : req.url);
 
-    switch (extensionName) {
-
-        case 'html': contentType = 'text/html'; break;
-        case 'css': contentType = 'text/css'; break;
-        case 'js': contentType = 'text/javascript'; break;
-    }
-
-    if (req.url == '/qwerty') {
+    if (req.url == '/sign') {
 
         let data = '';
 
-        req.on('data', chunk => data += chunk);
-        req.on('end', () => console.log(data));
+        req.on('data', chunk => {
+
+            data += chunk;
+
+            if (data.length > 1e6) {
+
+                res.writeHead(413, {'Content-Type': 'text/plain', 'Connection': 'close'});
+                res.end();
+                req.destroy();
+            }
+        });
+        req.on('end', () => {
+
+            res.writeHead(200, {'Content-Type': 'text/plain'});
+            res.end();
+        });
     }
 
-    else getFile(filePath)
+    else getFile(path)
         .then(content => {
+
+            const extensionName = path.split('.').pop();
+            let contentType;
+
+            switch (extensionName) {
+
+                case 'html': contentType = 'text/html'; break;
+                case 'css': contentType = 'text/css'; break;
+                case 'js': contentType = 'text/javascript'; break;
+            }
 
             res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
             res.end(content);
