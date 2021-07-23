@@ -1,7 +1,8 @@
 'use strict';
 
-const http = require('http'),
-      fs = require('fs');
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
 
 const getFile = fileName =>
     new Promise((resolve, reject) =>
@@ -14,7 +15,7 @@ const getFile = fileName =>
 
 http.createServer((req, res) => {
 
-    const path = __dirname + (req.url === '/' ? '/public/index.html' : req.url);
+    const filePath = path.resolve() + (req.url === '/' ? '/public/index.html' : req.url);
 
     if (req.url == '/sign') {
 
@@ -26,22 +27,22 @@ http.createServer((req, res) => {
 
             if (data.length > 1e6) {
 
-                res.writeHead(413, {'Content-Type': 'text/plain', 'Connection': 'close'});
+                res.writeHead(413, {'Content-Type': 'text/plain; charset = utf-8', 'Connection': 'close'});
                 res.end();
                 req.destroy();
             }
         });
         req.on('end', () => {
 
-            res.writeHead(200, {'Content-Type': 'text/plain'});
+            res.writeHead(200, {'Content-Type': 'text/plain; charset = utf-8'});
             res.end();
         });
     }
 
-    else getFile(path)
+    else getFile(filePath)
         .then(content => {
 
-            const extensionName = path.split('.').pop();
+            const extensionName = filePath.split('.').pop();
             let contentType;
 
             switch (extensionName) {
