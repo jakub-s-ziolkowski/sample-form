@@ -40,6 +40,20 @@ body {
     justify-content: flex-end;
 }
 
+@keyframes shake
+{
+    from { transform: translateX(0); }
+    25% { transform: translateX(.75rem); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(-.75rem); }
+    to { transform: translateX(0); }
+}
+
+.form__field--incorrect {
+
+    animation: shake .25s linear 1;
+}
+
 .form__label {
 
     position: absolute;
@@ -54,6 +68,8 @@ body {
     -ms-user-select: none;
     user-select: none;
     cursor: text;
+
+    transition: color .25s;
 }
 
 .form__label:first-letter {
@@ -77,6 +93,16 @@ body {
     transform: translateY(-3rem);
 }
 
+.form__field--incorrect > .form__label {
+
+    color: #E63946;
+}
+
+.form__field--correct > .form__label {
+
+    color: #40916C;
+}
+
 .form__input {
 
     padding: 0 1rem;
@@ -85,6 +111,18 @@ body {
     line-height: 2.8rem;
     font-size: 1.05rem;
     letter-spacing: .05rem;
+
+    transition: border-color .25s;
+}
+
+.form__field--incorrect > .form__input {
+
+    border-color: #E63946;
+}
+
+.form__field--correct > .form__input {
+
+    border-color: #40916C;
 }
 
 .form__button {

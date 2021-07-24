@@ -11,36 +11,52 @@ export const validateForm = form =>
 
         document.querySelectorAll('.form__input').forEach(element => {
 
-            const value = element.value;
+            const value = element.value,
+                  parent = element.parentElement;
+
+            let regexp;
 
             switch (element.type) {
 
                 case 'text':
-
-                    if (!value.match(new RegExp(/^[a-zA-Z]+$/)))
-                        element.classList.add('form__input--incorrect'),
-                        valid = false;
-
+                    regexp = /^[a-zA-Z]+$/;
                     break;
 
                 case 'email':
-
-                    if (!value.match(new RegExp(/^\S+@\S+$/)))
-                        element.classList.add('form__input--incorrect'),
-                        valid = false;
-
+                    regexp = /^\S+@\S+$/;
                     break;
 
                 case 'password':
-
-                    if (!value.match(new RegExp(/^\S{8,}$/)))
-                        element.classList.add('form__input--incorrect'),
-                        valid = false;
-
+                    regexp = /^\S{8,}$/;
                     break;
+
             }
 
-            if (valid) data[element.id] = value;
+            if (!value.match(regexp)) {
+
+                if (!parent.classList.contains('form__field--incorrect')) {
+
+                    parent.classList.add('form__field--incorrect');
+
+                    element.addEventListener('focus', () => parent.classList.remove('form__field--incorrect'));
+                    element.addEventListener('input', () => parent.classList.remove('form__field--incorrect'));
+                }
+
+                valid = false;
+            }
+
+            else {
+
+                if (!parent.classList.contains('form__field--correct')) {
+
+                    parent.classList.add('form__field--correct');
+
+                    element.addEventListener('focus', () => parent.classList.remove('form__field--correct'));
+                    element.addEventListener('input', () => parent.classList.remove('form__field--correct'));
+                }
+
+                data[element.id] = value;
+            }
         });
 
         if (valid) {
