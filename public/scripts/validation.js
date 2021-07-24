@@ -14,6 +14,8 @@ export const validateForm = form =>
             const value = element.value,
                   parent = element.parentElement;
 
+            const message = parent.querySelector('.form__message');
+
             let regexp;
 
             switch (element.type) {
@@ -32,28 +34,31 @@ export const validateForm = form =>
 
             }
 
+            const applyClass = className => {
+
+                if (!parent.classList.contains(className)) {
+
+                    parent.classList.add(className);
+
+                    element.addEventListener('focus', () => parent.classList.remove(className));
+                    element.addEventListener('input', () => parent.classList.remove(className));
+                }
+            };
+
             if (!value.match(regexp)) {
 
-                if (!parent.classList.contains('form__field--incorrect')) {
+                applyClass('form__field--incorrect');
 
-                    parent.classList.add('form__field--incorrect');
-
-                    element.addEventListener('focus', () => parent.classList.remove('form__field--incorrect'));
-                    element.addEventListener('input', () => parent.classList.remove('form__field--incorrect'));
-                }
+                message.innerText = 'Incorrect ' + element.name;
 
                 valid = false;
             }
 
             else {
 
-                if (!parent.classList.contains('form__field--correct')) {
+                applyClass('form__field--correct');
 
-                    parent.classList.add('form__field--correct');
-
-                    element.addEventListener('focus', () => parent.classList.remove('form__field--correct'));
-                    element.addEventListener('input', () => parent.classList.remove('form__field--correct'));
-                }
+                message.innerText = '';
 
                 data[element.id] = value;
             }
