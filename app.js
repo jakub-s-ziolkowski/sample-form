@@ -50,6 +50,7 @@ http.createServer((req, res) => {
                 case 'html': contentType = 'text/html'; break;
                 case 'css': contentType = 'text/css'; break;
                 case 'js': contentType = 'text/javascript'; break;
+                case 'svg': contentType = 'image/svg+xml'; break;
             }
 
             res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
