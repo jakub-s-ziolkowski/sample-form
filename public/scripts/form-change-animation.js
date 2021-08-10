@@ -29,10 +29,14 @@ export const animateForm = trigger =>
                     label.classList.add('form__label');
                     label.htmlFor = 'name';
 
+                    const span = document.createElement('span');
+                    span.classList.add('form__message');
+
                     const field = document.createElement('div');
                     field.classList.add('form__field');
                     field.appendChild(label);
                     field.appendChild(input);
+                    field.appendChild(span);
 
                     return field;
                 };
