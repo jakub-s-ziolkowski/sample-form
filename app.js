@@ -2,7 +2,9 @@
 
 import http from 'http';
 import fs from 'fs';
-import path from 'path';
+import p from 'path';
+
+const path = p.resolve();
 
 const getFile = fileName =>
     new Promise((resolve, reject) =>
@@ -14,8 +16,6 @@ const getFile = fileName =>
     );
 
 http.createServer((req, res) => {
-
-    const filePath = path.resolve() + (req.url === '/' ? '/public/index.html' : req.url);
 
     if (req.url == '/sign') {
 
@@ -39,27 +39,45 @@ http.createServer((req, res) => {
         });
     }
 
-    else getFile(filePath)
-        .then(content => {
+    else if (req.url == '/inputs')
+        getFile(path + '/settings.json')
+            .then(content => {
 
-            const extensionName = filePath.split('.').pop();
-            let contentType;
+                res.writeHead(200, {'Content-type': 'application/json; charset = utf-8'});
+                res.end(content);
+            })
+            .catch(error => {
 
-            switch (extensionName) {
+                res.setHeader('Content-Type', 'text/plain');
+                res.end(`Error ${error}`);
+            });
 
-                case 'html': contentType = 'text/html'; break;
-                case 'css': contentType = 'text/css'; break;
-                case 'js': contentType = 'text/javascript'; break;
-                case 'svg': contentType = 'image/svg+xml'; break;
-            }
+    else {
 
-            res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
-            res.end(content);
-        })
-        .catch(error => {
+        const filePath = path + (req.url === '/' ? '/public/index.html' : req.url);
 
-            res.setHeader('Content-Type', 'text/plain');
-            res.end(`Error ${error}`);
-        });
+        getFile(filePath)
+            .then(content => {
+
+                const extensionName = filePath.split('.').pop();
+                let contentType;
+
+                switch (extensionName) {
+
+                    case 'html': contentType = 'text/html'; break;
+                    case 'css': contentType = 'text/css'; break;
+                    case 'js': contentType = 'text/javascript'; break;
+                    case 'svg': contentType = 'image/svg+xml'; break;
+                }
+
+                res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
+                res.end(content);
+            })
+            .catch(error => {
+
+                res.setHeader('Content-Type', 'text/plain');
+                res.end(`Error ${error}`);
+            });
+    }
 
 }).listen(3000, '127.0.0.1');

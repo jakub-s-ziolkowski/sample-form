@@ -1,0 +1,33 @@
+{
+    "inputs":
+    [
+        {
+            "name": "name",
+            "type": "text",
+            "autoFIll": "fname",
+            "registrationOnly": true,
+            "regex": "/^[a-zA-Z]+$/"
+        },
+        {
+            "name": "surname",
+            "type": "text",
+            "autoFIll": "lname",
+            "registrationOnly": true,
+            "regex": "/^[a-zA-Z]+$/"
+        },
+        {
+            "name": "email",
+            "type": "email",
+            "autoFIll": "email",
+            "registrationOnly": false,
+            "regex": "/^\\S+@\\S+$/"
+        },
+        {
+            "name": "password",
+            "type": "password",
+            "autoFIll": "current/new-password",
+            "registrationOnly": false,
+            "regex": "/^\\S{8,}$/"
+        }
+    ]
+}
