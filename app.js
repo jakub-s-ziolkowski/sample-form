@@ -40,7 +40,7 @@ http.createServer((req, res) => {
     }
 
     else if (req.url == '/inputs')
-        getFile(path + '/settings.json')
+        getFile(path + '/inputs-config.json')
             .then(content => {
 
                 res.writeHead(200, {'Content-type': 'application/json; charset = utf-8'});
