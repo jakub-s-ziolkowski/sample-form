@@ -15,6 +15,18 @@ export const animatePlaceholder = (element, duration) => {
         }
     };
 
-    element.addEventListener('focus', applyAnimation);
+    const autocompleteEvent = new CustomEvent('autocomplete');
+
+    const listener = setInterval(() => {
+
+        if (element.parentElement.querySelector('.form__input:-webkit-autofill')) {
+
+            element.dispatchEvent(autocompleteEvent);
+            clearInterval(listener);
+        }
+    }, 50);
+
     element.addEventListener('blur', applyAnimation);
+    element.addEventListener('focus', applyAnimation);
+    element.addEventListener('autocomplete', applyAnimation);
 };
