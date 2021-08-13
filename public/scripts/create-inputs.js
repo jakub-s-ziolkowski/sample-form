@@ -1,5 +1,7 @@
 'use strict';
 
+import { animatePlaceholder } from "./animate-placeholder.js";
+
 export const createInputs = (form, type) => {
 
     new Promise((resolve, reject) => {
@@ -52,6 +54,8 @@ export const createInputs = (form, type) => {
                     element.autoComplete.includes('/') ?
                         element.autoComplete.split('-')[0].split('/')[type ? 1 : 0] + '-' + element.autoComplete.split('-')[1] :
                         element.autoComplete);
+
+                animatePlaceholder(input, 450);
 
                 const span = document.createElement('span');
                 span.classList.add('form__message');
