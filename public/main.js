@@ -1,5 +1,5 @@
 'use strict';
 
-import { createInputs } from './scripts/create-inputs.js';
+import { initForm } from "./scripts/init-form.js";
 
-createInputs(document.querySelector('.form'), false);
+initForm(document.querySelector('.frame'));

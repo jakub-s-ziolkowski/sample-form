@@ -2,8 +2,7 @@
 
 import { animatePlaceholder } from "./animate-placeholder.js";
 
-export const createInputs = (form, type) => {
-
+export const createInputs = (form, type) =>
     new Promise((resolve, reject) => {
 
         const xhr = new XMLHttpRequest();
@@ -71,5 +70,3 @@ export const createInputs = (form, type) => {
         });
     })
     .catch(error => console.error(error.statusText));
-
-};
