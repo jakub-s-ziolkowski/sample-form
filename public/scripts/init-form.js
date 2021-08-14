@@ -10,5 +10,22 @@ export const initForm = frame => {
 
     createInputs(form, false);
 
-    trigger.addEventListener('click', () => changeForm(frame));
+    frame.classList.remove('frame--invisible');
+
+    const fade = () => {
+
+        trigger.removeEventListener('click', fade);
+
+        frame.classList.add('frame--invisible');
+
+        setTimeout(() => {
+
+            frame.classList.add('frame--hidden');
+            changeForm(frame);
+            frame.classList.remove('frame--invisible', 'frame--hidden');
+            trigger.addEventListener('click', fade);
+        }, 500);
+    };
+
+    trigger.addEventListener('click', fade);
 };

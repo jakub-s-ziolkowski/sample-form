@@ -15,7 +15,17 @@ body {
     flex-direction: column;
     margin: auto;
     min-width: 25rem;
-    transition: opacity 1s;
+    transition: opacity .5s;
+}
+
+.frame--invisible {
+
+    opacity: 0;
+}
+
+.frame--hidden {
+
+    visibility: hidden;
 }
 
 .frame--transition {
