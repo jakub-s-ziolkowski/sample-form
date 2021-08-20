@@ -2,6 +2,7 @@
 
 import { changeForm } from './change-form.js';
 import { createInputs } from './create-inputs.js';
+import { validateForm } from './validate-form.js';
 
 export const initForm = frame => {
 
@@ -9,6 +10,7 @@ export const initForm = frame => {
           trigger = frame.querySelector('.frame__trigger');
 
     createInputs(form, false);
+    validateForm(form);
 
     frame.classList.remove('frame--invisible');
 

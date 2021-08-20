@@ -48,6 +48,7 @@ export const createInputs = (form, type) =>
                 input.setAttribute('id', element.name);
                 input.setAttribute('name', element.name);
                 input.setAttribute('type', element.type);
+                input.setAttribute('data-regex', element.regex);
                 input.setAttribute(
                     'autocomplete',
                     element.autoComplete.includes('/') ?

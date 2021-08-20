@@ -4,27 +4,27 @@
         "type": "text",
         "autoComplete": "given-name",
         "registrationOnly": true,
-        "regex": "/^[a-zA-Z]+$/"
+        "regex": "^[a-zA-Z]+$"
     },
     {
         "name": "surname",
         "type": "text",
         "autoComplete": "family-name",
         "registrationOnly": true,
-        "regex": "/^[a-zA-Z]+$/"
+        "regex": "^[a-zA-Z]+$"
     },
     {
         "name": "email",
         "type": "email",
         "autoComplete": "email",
         "registrationOnly": false,
-        "regex": "/^\\S+@\\S+$/"
+        "regex": "^\\S+@\\S+$"
     },
     {
         "name": "password",
         "type": "password",
         "autoComplete": "current/new-password",
         "registrationOnly": false,
-        "regex": "/^\\S{8,}$/"
+        "regex": "^\\S{8,}$"
     }
 ]

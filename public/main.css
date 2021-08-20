@@ -50,8 +50,8 @@ body {
     justify-content: flex-end;
 }
 
-@keyframes shake
-{
+@keyframes shake {
+
     from { transform: translateX(0); }
     25% { transform: translateX(.75rem); }
     50% { transform: translateX(0); }
@@ -59,7 +59,7 @@ body {
     to { transform: translateX(0); }
 }
 
-.form__field--incorrect {
+.form__field--shake {
 
     animation: shake .25s linear 1;
 }
