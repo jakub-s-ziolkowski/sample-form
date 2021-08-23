@@ -1,6 +1,7 @@
 'use strict';
 
 import http from 'http';
+import sass from 'sass';
 import fs from 'fs';
 import p from 'path';
 
@@ -55,11 +56,19 @@ http.createServer((req, res) => {
     else {
 
         const filePath = path + (req.url === '/' ? '/public/index.html' : req.url);
+        const extensionName = filePath.split('.').pop();
 
-        getFile(filePath)
+        if (extensionName === 'scss') {
+
+            const result = sass.renderSync({file: filePath});
+
+            res.writeHead(200, {'Content-type': 'text/css; charset = utf-8'});
+            res.end(result.css.toString());
+        }
+
+        else getFile(filePath)
             .then(content => {
 
-                const extensionName = filePath.split('.').pop();
                 let contentType;
 
                 switch (extensionName) {

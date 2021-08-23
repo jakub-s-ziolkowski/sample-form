@@ -11,5 +11,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jakub-s-ziolkowski/sample-form.git"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "sass": "^1.38.0"
   }
 }
