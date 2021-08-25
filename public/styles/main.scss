@@ -65,6 +65,8 @@ body {
 
 .form {
 
+    $field: &__field;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,19 +83,6 @@ body {
         &--shake {
 
             animation: shake .25s linear 1;
-        }
-
-        &--incorrect {
-
-            .form__label { color: #E63946; }
-            .form__input { border-color: #E63946; }
-            .form__message { transform: translateY(1.5rem); }
-        }
-
-        &--correct {
-
-            .form__label { color: #40916C; }
-            .form__input { border-color: #40916C; }
         }
     }
 
@@ -131,6 +120,10 @@ body {
 
             transform: translateY(-3rem);
         }
+
+        #{ $field }--incorrect & { color: #E63946; }
+        #{ $field }--correct & { color: #40916C; }
+
     }
 
     &__input {
@@ -143,6 +136,9 @@ body {
         letter-spacing: .05rem;
 
         transition: border-color .25s;
+
+        #{ $field }--incorrect & { border-color: #E63946; }
+        #{ $field }--correct & { border-color: #40916C; }
     }
 
     &__message {
@@ -157,6 +153,8 @@ body {
         z-index: -1;
 
         transition: transform .5s;
+
+        #{ $field }--incorrect & { transform: translateY(1.5rem); }
     }
 
     &__button {
