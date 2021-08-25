@@ -60,10 +60,17 @@ http.createServer((req, res) => {
 
         if (extensionName === 'scss') {
 
-            const result = sass.renderSync({file: filePath});
+            sass.render({file: filePath},
+                (error, result) => {
 
-            res.writeHead(200, {'Content-type': 'text/css; charset = utf-8'});
-            res.end(result.css.toString());
+                    if (error) console.error(error.message);
+
+                    else {
+
+                        res.writeHead(200, {'Content-type': 'text/css; charset = utf-8'});
+                        res.end(result.css.toString());
+                    }
+                });
         }
 
         else getFile(filePath)
