@@ -1,4 +1,5 @@
 @use './abstracts/keyframes';
+@use './abstracts/colors';
 
 * {
 
@@ -15,7 +16,7 @@ body {
 
     display: flex;
     min-height: 100vh;
-    background-image: linear-gradient(to right bottom, #FFF, #FAFAFA, #FFF);
+    background-image: linear-gradient(to right bottom, white, darken(white, 2.5%), white);
 }
 
 .frame {
@@ -26,20 +27,11 @@ body {
     min-width: 25rem;
     transition: opacity .5s;
 
-    &--invisible {
+    &--invisible { opacity: 0; }
 
-        opacity: 0;
-    }
+    &--hidden { visibility: hidden; }
 
-    &--hidden {
-
-        visibility: hidden;
-    }
-
-    &--transition {
-
-        opacity: 0;
-    }
+    &--transition { opacity: 0; }
 
     &__trigger {
 
@@ -48,7 +40,7 @@ body {
 
         line-height: 1.5rem;
         font-size: 1.15rem;
-        color: #A1A2A3;
+        color: colors.$gray;
         letter-spacing: .05rem;
 
         cursor: pointer;
@@ -58,14 +50,14 @@ body {
         &:hover {
 
             font-size: 1.1rem;
-            color: #717273;
+            color: darken(colors.$gray, 20%);
         }
     }
 }
 
 .form {
 
-    $field: &__field;
+    $field: '.form__field';
 
     display: flex;
     flex-direction: column;
@@ -80,10 +72,7 @@ body {
         flex-direction: column;
         justify-content: flex-end;
 
-        &--shake {
-
-            animation: shake .25s linear 1;
-        }
+        &--shake { animation: shake .25s linear 1; }
     }
 
     &__label {
@@ -92,7 +81,7 @@ body {
         line-height: 3rem;
         text-indent: 1.1rem;
         font-size: 1.05rem;
-        color: #A1A2A3;
+        color: colors.$gray;
         letter-spacing: .05rem;
 
         user-select: none;
@@ -100,10 +89,7 @@ body {
 
         transition: color .25s;
 
-        &:first-letter {
-
-            text-transform: capitalize;
-        }
+        &:first-letter { text-transform: capitalize; }
 
         &--transition {
 
@@ -116,20 +102,20 @@ body {
             line-height: 2rem;
             text-indent: initial;
             font-size: 1rem;
-            color: #717273;
+            color: darken(colors.$gray, 20%);
 
             transform: translateY(-3rem);
         }
 
-        #{ $field }--incorrect & { color: #E63946; }
-        #{ $field }--correct & { color: #40916C; }
+        #{ $field }--incorrect & { color: colors.$red; }
+        #{ $field }--correct & { color: colors.$green; }
 
     }
 
     &__input {
 
         padding: 0 1rem;
-        border: .1rem solid #E1E2E3;
+        border: .1rem solid colors.$gray;
 
         line-height: 2.8rem;
         font-size: 1.05rem;
@@ -137,8 +123,8 @@ body {
 
         transition: border-color .25s;
 
-        #{ $field }--incorrect & { border-color: #E63946; }
-        #{ $field }--correct & { border-color: #40916C; }
+        #{ $field }--incorrect & { border-color: colors.$red; }
+        #{ $field }--correct & { border-color: colors.$green; }
     }
 
     &__message {
@@ -148,7 +134,7 @@ body {
         width: 100%;
         line-height: 1.5rem;
         text-align: center;
-        color: #E63946;
+        color: colors.$red;
 
         z-index: -1;
 
@@ -161,12 +147,12 @@ body {
 
         margin: 1.5rem 0;
         width: 55%;
-        background-color: #00A8E8;
+        background-color: colors.$blue;
 
         line-height: 3rem;
         font-family: 'Trebuchet MS', sans-serif;
         font-size: 1.5rem;
-        color: #FFF;
+        color: white;
         letter-spacing: .1rem;
 
         cursor: pointer;
@@ -179,7 +165,7 @@ body {
 
             margin: 1.6rem 0 1.6rem 0;
             width: 54%;
-            background-color: #0095D5;
+            background-color: darken(colors.$blue, 5%);
 
             line-height: 2.8rem;
         }
