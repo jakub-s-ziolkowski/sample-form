@@ -5,6 +5,8 @@ import sass from 'sass';
 import fs from 'fs';
 import p from 'path';
 
+import * as signController from './app/controllers/signController.js';
+
 const path = p.resolve();
 
 const getFile = fileName =>
@@ -18,27 +20,7 @@ const getFile = fileName =>
 
 http.createServer((req, res) => {
 
-    if (req.url == '/sign') {
-
-        let data = '';
-
-        req.on('data', chunk => {
-
-            data += chunk;
-
-            if (data.length > 1e6) {
-
-                res.writeHead(413, {'Content-Type': 'text/plain; charset = utf-8', 'Connection': 'close'});
-                res.end();
-                req.destroy();
-            }
-        });
-        req.on('end', () => {
-
-            res.writeHead(200, {'Content-Type': 'text/plain; charset = utf-8'});
-            res.end();
-        });
-    }
+    if (req.url == '/sign') signController.receiveData(req, res);
 
     else if (req.url == '/inputs')
         getFile(path + '/inputs-config.json')
