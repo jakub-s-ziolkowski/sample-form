@@ -1,7 +1,6 @@
 'use strict';
 
 import http from 'http';
-import sass from 'sass';
 
 import * as signController from './app/signController.js';
 import { getFile } from './app/getFile.js';
@@ -29,22 +28,7 @@ http.createServer((req, res) => {
         const filePath = process.env.PWD + (req.url === '/' ? '/public/index.html' : req.url);
         const extensionName = filePath.split('.').pop();
 
-        if (extensionName === 'scss') {
-
-            sass.render({file: filePath},
-                (error, result) => {
-
-                    if (error) console.error(error.message);
-
-                    else {
-
-                        res.writeHead(200, {'Content-type': 'text/css; charset = utf-8'});
-                        res.end(result.css.toString());
-                    }
-                });
-        }
-
-        else getFile(
+        getFile(
             filePath,
             content => {
 

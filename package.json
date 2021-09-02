@@ -6,7 +6,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node -r dotenv/config app.js"
+    "start": "node -r dotenv/config app.js",
+    "compile-scss": "sass --style=compressed ./public/styles/scss/main.scss ./public/styles/css/main.css",
+    "watch-scss": "sass --watch --style=compressed ./public/styles/scss/main.scss ./public/styles/css/main.css"
   },
   "repository": {
     "type": "git",
