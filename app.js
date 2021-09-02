@@ -2,31 +2,23 @@
 
 import http from 'http';
 import sass from 'sass';
-import fs from 'fs';
 
-import * as signController from './app/controllers/signController.js';
-
-const getFile = fileName =>
-    new Promise((resolve, reject) =>
-        fs.readFile(fileName, (error, content) => {
-
-            if (!error && content) resolve(content);
-            else reject(error);
-        })
-    );
+import * as signController from './app/signController.js';
+import { getFile } from './app/getFile.js';
 
 http.createServer((req, res) => {
 
     if (req.url == '/sign') signController.receiveData(req, res);
 
     else if (req.url == '/inputs')
-        getFile(process.env.PWD + '/inputs-config.json')
-            .then(content => {
+        getFile(
+            process.env.PWD + '/inputs-config.json',
+            content => {
 
                 res.writeHead(200, {'Content-type': 'application/json; charset = utf-8'});
                 res.end(content);
-            })
-            .catch(error => {
+            },
+            error => {
 
                 res.setHeader('Content-Type', 'text/plain');
                 res.end(`Error ${error}`);
@@ -52,8 +44,9 @@ http.createServer((req, res) => {
                 });
         }
 
-        else getFile(filePath)
-            .then(content => {
+        else getFile(
+            filePath,
+            content => {
 
                 let contentType;
 
@@ -67,8 +60,8 @@ http.createServer((req, res) => {
 
                 res.writeHead(200, {'Content-type': `${contentType}; charset = utf-8`});
                 res.end(content);
-            })
-            .catch(error => {
+            },
+            error => {
 
                 res.setHeader('Content-Type', 'text/plain');
                 res.end(`Error ${error}`);
