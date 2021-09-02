@@ -3,11 +3,8 @@
 import http from 'http';
 import sass from 'sass';
 import fs from 'fs';
-import p from 'path';
 
 import * as signController from './app/controllers/signController.js';
-
-const path = p.resolve();
 
 const getFile = fileName =>
     new Promise((resolve, reject) =>
@@ -23,7 +20,7 @@ http.createServer((req, res) => {
     if (req.url == '/sign') signController.receiveData(req, res);
 
     else if (req.url == '/inputs')
-        getFile(path + '/inputs-config.json')
+        getFile(process.env.PWD + '/inputs-config.json')
             .then(content => {
 
                 res.writeHead(200, {'Content-type': 'application/json; charset = utf-8'});
@@ -37,7 +34,7 @@ http.createServer((req, res) => {
 
     else {
 
-        const filePath = path + (req.url === '/' ? '/public/index.html' : req.url);
+        const filePath = process.env.PWD + (req.url === '/' ? '/public/index.html' : req.url);
         const extensionName = filePath.split('.').pop();
 
         if (extensionName === 'scss') {
@@ -78,4 +75,4 @@ http.createServer((req, res) => {
             });
     }
 
-}).listen(3000, '127.0.0.1');
+}).listen(process.env.PORT);
