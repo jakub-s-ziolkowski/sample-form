@@ -9,24 +9,19 @@ http.createServer((req, res) => {
 
     if (req.url == '/sign') signController.receiveData(req, res);
 
-    else if (req.url == '/inputs')
-        getFile(
-            process.env.PWD + '/inputs-config.json',
-            content => {
-
-                res.writeHead(200, {'Content-type': 'application/json; charset = utf-8'});
-                res.end(content);
-            },
-            error => {
-
-                res.setHeader('Content-Type', 'text/plain');
-                res.end(`Error ${error}`);
-            });
-
     else {
 
-        const filePath = process.env.PWD + (req.url === '/' ? '/public/index.html' : req.url);
-        const extensionName = filePath.split('.').pop();
+        let relativePath;
+
+        switch (req.url) {
+
+            case '/': relativePath = '/public/index.html'; break;
+            case '/inputs': relativePath = '/inputs-config.json'; break;
+            default: relativePath = req.url; break;
+        }
+
+        const filePath = process.env.PWD + relativePath,
+              extensionName = relativePath.split('.').pop();
 
         getFile(
             filePath,
@@ -39,6 +34,7 @@ http.createServer((req, res) => {
                     case 'html': contentType = 'text/html'; break;
                     case 'css': contentType = 'text/css'; break;
                     case 'js': contentType = 'text/javascript'; break;
+                    case 'json': contentType = 'application/json'; break;
                     case 'svg': contentType = 'image/svg+xml'; break;
                 }
 
