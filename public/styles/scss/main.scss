@@ -72,7 +72,11 @@ body {
         flex-direction: column;
         justify-content: flex-end;
 
-        &--shake { animation: shake .25s linear 1; }
+        &--shake {
+
+            animation: shake .25s linear 1;
+            -webkit-animation: shake .25s linear 1;
+        }
     }
 
     &__label {
@@ -84,8 +88,11 @@ body {
         color: colors.$gray;
         letter-spacing: .05rem;
 
-        user-select: none;
         cursor: text;
+        user-select: none;
+        -ms-user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
 
         transition: color .25s;
 
