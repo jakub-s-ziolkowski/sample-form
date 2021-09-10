@@ -74,8 +74,8 @@ body {
 
         &--shake {
 
-            animation: shake .25s linear 1;
             -webkit-animation: shake .25s linear 1;
+            animation: shake .25s linear 1;
         }
     }
 
@@ -88,11 +88,11 @@ body {
         color: colors.$gray;
         letter-spacing: .05rem;
 
-        cursor: text;
-        user-select: none;
-        -ms-user-select: none;
-        -moz-user-select: none;
         -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: text;
 
         transition: color .25s;
 
