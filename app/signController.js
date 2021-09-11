@@ -1,25 +1,17 @@
 'use strict';
 
-const receiveData = (req, res) => {
+import { receiveData } from './receiveData.js';
 
-    let data = '';
+const signIn = (req, res) =>
+    receiveData(req, res, content => {
 
-    req.on('data', chunk => {
-
-        data += chunk;
-
-        if (data.length > 1e6) {
-
-            res.writeHead(413, {'Content-Type': 'text/plain; charset = utf-8', 'Connection': 'close'});
-            res.end();
-            req.destroy();
-        }
+        console.log(content);
     });
-    req.on('end', () => {
 
-        res.writeHead(200, {'Content-Type': 'text/plain; charset = utf-8'});
-        res.end();
+const signUp = (req, res) =>
+    receiveData(req, res, content => {
+
+        console.log(content);
     });
-};
 
-export { receiveData };
+export { signIn, signUp };

@@ -1,5 +1,7 @@
 'use strict';
 
+import { submitForm } from './submit-form.js';
+
 export const validateForm = form => {
 
     const validation = event => {
@@ -62,16 +64,7 @@ export const validateForm = form => {
             }
         });
 
-        if (valid) {
-
-            console.log(data);
-
-            const xhr = new XMLHttpRequest();
-
-            xhr.open('POST', 'sign');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify(data));
-        }
+        if (valid) submitForm(data, form.getAttribute('data-type'));
 
         form.addEventListener('submit', validation);
     };

@@ -7,7 +7,8 @@ import { getFile } from './app/getFile.js';
 
 http.createServer((req, res) => {
 
-    if (req.url == '/sign') signController.receiveData(req, res);
+    if (req.url == '/sign-in') signController.signIn(req, res);
+    else if (req.url == '/sign-up') signController.signUp(req, res);
 
     else {
 
