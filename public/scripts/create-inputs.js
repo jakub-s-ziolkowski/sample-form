@@ -1,6 +1,6 @@
 'use strict';
 
-import { animatePlaceholder } from "./animate-placeholder.js";
+import { animatePlaceholder } from './animate-placeholder.js';
 
 export const createInputs = (form, type) =>
     new Promise((resolve, reject) => {
